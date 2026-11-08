@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Team Earth: 18-Man Roster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3efe6;--surface:#fff;--ink:#14204f;--muted:#5b6488;--line:#d9d3c3;
+  --court:#e8742c;--court2:#d9661f;--accent:#14204f;--gold:#b97a00;--cpt:#c2341d;
+  --chip:#e9e4d4;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1640;--surface:#17235e;--ink:#f4efe2;--muted:#a9b2da;--line:#2b3a85;
+    --court:#e8742c;--court2:#d9661f;--accent:#f4efe2;--gold:#f2b544;--cpt:#ff7b5c;--chip:#1f2e75;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1640;--surface:#17235e;--ink:#f4efe2;--muted:#a9b2da;--line:#2b3a85;
+  --court:#e8742c;--court2:#d9661f;--accent:#f4efe2;--gold:#f2b544;--cpt:#ff7b5c;--chip:#1f2e75;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding:28px 18px 64px}
+h1,h2,.num{font-family:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;font-weight:900;text-transform:none;margin:0}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0 28px;border-bottom:3px solid var(--ink)}
+h1{font-size:clamp(56px,15vw,132px);line-height:.88;letter-spacing:-.01em}
+.hero p{margin:10px 0 0;color:var(--muted);max-width:34ch}
+.ball{flex:none;width:clamp(84px,20vw,170px);height:auto}
+h2{font-size:clamp(30px,6vw,44px);margin:44px 0 14px;line-height:1}
+.lead{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cap{background:var(--surface);border:2px solid var(--ink);border-radius:6px;padding:16px;position:relative}
+.cap .badge{position:absolute;top:-14px;left:14px;background:var(--cpt);color:#fff;font:900 20px "Big Shoulders Display",sans-serif;padding:2px 12px;border-radius:3px}
+.cap b{display:block;font:900 clamp(24px,5vw,34px)/1 "Big Shoulders Display",sans-serif;margin-top:6px}
+.cap span{color:var(--muted);font-size:14px}
+.court{background:repeating-linear-gradient(90deg,var(--court),var(--court) 54px,var(--court2) 54px,var(--court2) 108px);border:4px solid var(--ink);border-radius:6px;padding:0 0 14px;position:relative}
+.net{background:var(--ink);color:var(--bg);font:700 13px "Instrument Sans",sans-serif;text-align:center;padding:5px;letter-spacing:.04em}
+.rows{display:grid;gap:0}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
+.row+.row{border-top:3px solid #fff}
+.pl{background:rgba(255,255,255,.94);color:#14204f;border-radius:5px;padding:9px 10px;min-height:92px}
+.pl .pos{font:900 20px "Big Shoulders Display",sans-serif;color:#c2341d}
+.pl b{display:block;font-size:15px;line-height:1.2;font-weight:600}
+.pl small{display:block;color:#4a5580;font-size:12px;line-height:1.3;margin-top:3px}
+.libs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px}
+.libs .pl{border-left:5px solid #14204f}
+.note{color:var(--muted);font-size:13px;margin:8px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip,.rchip{border:2px solid var(--ink);background:var(--chip);color:var(--ink);font:600 14px "Instrument Sans",sans-serif;padding:7px 13px;border-radius:99px;cursor:pointer}
+.chip[aria-pressed="true"],.rchip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.rchip:focus-visible,.chip:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--ink);border-radius:6px;padding:12px 14px}
+.card.start{border-left-color:var(--court)}
+.card h3{margin:0;font:900 24px/1 "Big Shoulders Display",sans-serif;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tag{font:600 11px "Instrument Sans",sans-serif;background:var(--court);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap}
+.tag.c{background:var(--cpt)}
+.meta{color:var(--muted);font-size:13px;margin:4px 0 6px}
+.card p{margin:0;font-size:14px}
+.card[hidden]{display:none}
+.pl.srv{outline:4px solid #14204f;outline-offset:-4px}.pl.lib{background:#14204f;color:#f4efe2}.pl.lib .pos{color:#f2b544}.pl.lib small{color:#c8d0f0}.pl .pn{font:600 11px 'Instrument Sans',sans-serif;color:#4a5580}.pl.lib .pn{color:#c8d0f0}.rowlbl{padding:8px 12px 0;color:#fff;font:700 12px 'Instrument Sans',sans-serif}
+.sg{font:900 26px/1 'Big Shoulders Display',sans-serif;margin:26px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+.staff{display:grid;gap:10px}
+.sc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;grid-template-columns:150px 1fr;gap:6px 16px}
+.sc .role{font:900 20px/1.05 'Big Shoulders Display',sans-serif;color:var(--cpt)}
+.sc .who b{font-size:16px;font-weight:600}
+.sc .who span{display:block;color:var(--muted);font-size:13px}
+.sc .why{grid-column:2;font-size:14px;margin:0}
+.sc .why strong{font-weight:600}
+.tac{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--court);border-radius:6px;padding:14px 16px}
+.tac h3{margin:0 0 8px;font:900 28px/1 'Big Shoulders Display',sans-serif;display:flex;gap:12px;align-items:baseline}
+.tac h3 i{font-style:normal;color:var(--cpt)}
+.tac dl{margin:0;display:grid;grid-template-columns:78px 1fr;gap:8px 14px;font-size:14px}
+.tac dt{font:700 13px 'Instrument Sans',sans-serif;color:var(--cpt)}
+.tac dd{margin:0}
+.tac p{margin:0;font-size:14px}
+.tacs{display:grid;gap:12px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding:10px 0;border-bottom:1px solid var(--line)}
+.nav a,.nav button{flex:none;color:var(--ink);background:none;text-decoration:none;font:600 14px 'Instrument Sans',sans-serif;padding:7px 14px;border-radius:99px;border:2px solid var(--ink);cursor:pointer}
+.nav a[aria-current=page]{background:var(--ink);color:var(--bg)}
+.nav a:focus-visible,.nav button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.page{display:none}.page.on{display:block}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}
+.tile{border:2px solid var(--ink);border-radius:6px;padding:10px 12px;background:var(--surface)}
+.tile b{display:block;font:900 42px/1 'Big Shoulders Display',sans-serif}
+.tile span{font-size:13px;color:var(--muted)}
+.motto{font:900 clamp(22px,4vw,30px)/1.1 'Big Shoulders Display',sans-serif;color:var(--cpt);margin:0}
+.bars{display:grid;grid-template-columns:30px 1fr;gap:3px 8px;margin-top:8px;font-size:11px;color:var(--muted)}
+.bars i{display:block;height:6px;background:var(--chip);border-radius:3px;align-self:center;overflow:hidden}
+.bars u{display:block;height:100%;background:var(--court)}
+.org{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
+.org .col{display:grid;gap:6px;border-left:3px solid var(--court);padding-left:10px}
+.org .box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px}
+.org .box small{display:block;color:var(--muted)}
+.org .hd{border:2px solid var(--ink)}
+.orgtop{max-width:260px;margin:0 auto 12px;text-align:center;border:2px solid var(--ink);background:var(--surface);border-radius:6px;padding:8px;font-size:14px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 16px}
+.plan dl{margin:0;display:grid;grid-template-columns:64px 1fr;gap:0 14px;font-size:14px}
+.plan dt{font:900 22px/1 'Big Shoulders Display',sans-serif;color:var(--cpt);padding:10px 0;border-top:1px solid var(--line)}
+.plan dd{margin:0;padding:10px 0;border-top:1px solid var(--line)}
+.plan dt:first-of-type,.plan dd:first-of-type{border-top:0}
+@media (max-width:560px){.tiles{grid-template-columns:1fr 1fr}.org{grid-template-columns:1fr}}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:14px 0}
+.pk{display:flex;flex-direction:column;align-items:flex-start;text-align:left;border:2px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:6px;padding:8px 10px;cursor:pointer;font:600 14px 'Instrument Sans',sans-serif}
+.pk small{color:var(--muted);font-weight:400;font-size:12px}
+.pk[aria-pressed=true]{background:var(--ink);color:var(--bg)}.pk[aria-pressed=true] small{color:var(--bg)}
+.pk:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.k2{background:#0e1640;color:#f4efe2;border:3px solid #f2b544;border-radius:10px;padding:16px;scroll-margin-top:70px}
+.k2h{display:flex;gap:16px;align-items:center;padding-bottom:14px;border-bottom:2px solid #2b3a85}
+.ovr{background:#f2b544;color:#0e1640;border-radius:8px;padding:6px 14px;text-align:center}
+.ovr b{display:block;font:900 64px/1 'Big Shoulders Display',sans-serif}.ovr span{font:700 12px 'Instrument Sans',sans-serif}
+.k2h h3{margin:0;font:900 clamp(30px,6vw,46px)/1 'Big Shoulders Display',sans-serif}
+.k2h p{margin:4px 0 8px;color:#a9b2da;font-size:14px}
+.top{display:flex;flex-wrap:wrap;gap:6px}.top span{background:#1f2e75;border:1px solid #f2b544;border-radius:99px;padding:2px 10px;font-size:12px}
+.k2g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:14px}
+.kc h4{margin:0 0 6px;font:900 22px/1 'Big Shoulders Display',sans-serif;color:#f2b544;display:flex;justify-content:space-between}
+.kc h4 em{font-style:normal;color:#f4efe2}
+.kr{display:grid;grid-template-columns:1fr auto;gap:3px 8px;width:100%;text-align:left;background:none;border:0;border-top:1px solid #1f2e75;color:inherit;padding:6px 0;cursor:pointer;font:400 13px 'Instrument Sans',sans-serif}
+.kr .kn{color:#f4efe2}.kr .kv{font:900 20px/1 'Big Shoulders Display',sans-serif}
+.kr i{grid-column:1/-1;height:5px;background:#1f2e75;border-radius:3px;overflow:hidden}.kr u{display:block;height:100%;background:currentColor}
+.kr small{display:none;grid-column:1/-1;color:#a9b2da;font-size:12px}.kr.open small{display:block}
+.kr:focus-visible{outline:2px solid #f2b544}
+.t4{color:#f2b544}.t3{color:#5fd38d}.t2{color:#6aa9ff}.t1{color:#b8c0e8}.t0{color:#7a84b8}
+@media (max-width:560px){.k2h{flex-direction:column;align-items:flex-start}}
+.ident{display:flex;gap:20px;align-items:center;margin-top:22px;padding:18px;background:var(--surface);border:2px solid var(--ink);border-radius:8px}
+.crest{flex:none;width:clamp(90px,22vw,130px);height:auto}
+.ident h3{margin:0;font:900 clamp(32px,7vw,48px)/1 'Big Shoulders Display',sans-serif}
+.ident dl{margin:10px 0 0;display:grid;grid-template-columns:90px 1fr;gap:4px 12px;font-size:14px}
+.ident dt{font-weight:600;color:var(--cpt)}.ident dd{margin:0}
+.sw{display:inline-block;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink);vertical-align:middle;margin-right:4px}
+@media (max-width:560px){.ident{flex-direction:column;align-items:flex-start}}
+.bdg{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.bdg span{background:#f2b544;color:#0e1640;border-radius:4px;padding:2px 9px;font:900 15px/1.3 'Big Shoulders Display',sans-serif;letter-spacing:.02em}
+.kchip{border:2px solid var(--ink);background:var(--chip);color:var(--ink);font:600 14px 'Instrument Sans',sans-serif;padding:7px 18px;border-radius:99px;cursor:pointer}
+.kchip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.kchip:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.kits{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.kit{text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 6px}
+.kit svg{width:100%;max-width:110px;height:auto;display:block;margin:0 auto 6px}
+.kit b{display:block;font:600 13px 'Instrument Sans',sans-serif}
+.kit small{color:var(--muted);font-size:12px}
+.tr{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:stretch}
+.trbig{background:var(--ink);color:var(--bg);border-radius:8px;padding:12px 24px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.trbig b{font:900 76px/1 'Big Shoulders Display',sans-serif}
+.trbig span{font-size:12px;font-weight:600}
+.trg{display:grid;gap:8px;align-content:center}
+.grow{display:grid;grid-template-columns:130px 1fr 36px;gap:10px;align-items:center;font-size:14px}
+.grow i{display:block;height:10px;background:var(--chip);border-radius:5px;overflow:hidden}
+.grow u{display:block;height:100%;background:var(--court)}
+.grow b{font:900 22px/1 'Big Shoulders Display',sans-serif;text-align:right}
+@media (max-width:560px){.tr{grid-template-columns:1fr}.grow{grid-template-columns:104px 1fr 34px}}
+@media print{.nav{display:none}.chips{display:none}.page{display:block!important;break-inside:avoid-page}body::before{display:none}}
+@media (max-width:560px){.sc{grid-template-columns:1fr}.sc .why{grid-column:1}}
+@media (max-width:560px){.lead{grid-template-columns:1fr}.hero{flex-direction:column-reverse;align-items:flex-start}.libs{grid-template-columns:1fr}.pl{min-height:0;padding:7px}.pl small{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <h1>Team Earth</h1>
+      <p class="motto">One planet. One roster. Seven sets.</p><p>The locked-in 18-man InterGalactic roster, built around a Starting 7 and a double-libero system.</p>
+    </div>
+    <svg class="ball" viewBox="0 0 100 128" role="img" aria-label="Team Earth logo">
+      <path d="M8 6h84v54c0 30-26 48-42 56C34 108 8 90 8 60z" fill="#14204f" stroke="#f2b544" stroke-width="5"/>
+      <circle cx="50" cy="54" r="27" fill="#e8742c" stroke="#f4efe2" stroke-width="3"/>
+      <path d="M24 44c16 6 36 6 52 0M22 64c18-6 38-6 56 0M50 27c-12 14-12 40 0 54M50 27c12 14 12 40 0 54" fill="none" stroke="#f4efe2" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 11l3 7h7l-5.500 4.500 2 7L50 25l-6.500 4.500 2-7L40 18h7z" fill="#f2b544"/>
+      <rect x="14" y="88" width="72" height="20" rx="3" fill="#f2b544"/>
+      <text x="50" y="104" text-anchor="middle" font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="900" font-size="19" fill="#14204f">EARTH</text>
+    </svg>
+  </header>
+  <nav class="nav" id="nav" aria-label="Pages">
+    <a href="#home">Team</a><a href="#lineup">Lineup</a><a href="#roster">Roster</a><a href="#cards">Cards</a><a href="#kits">Kits</a><a href="#staff">Staff</a><a href="#playbook">Playbook</a><a href="#matchplan">Match plan</a><button type="button" id="prt">Print</button>
+  </nav>
+
+  <section class="page" id="home">
+  <div class="ident">
+    <svg class="crest" viewBox="0 0 100 120" role="img" aria-label="Team Earth crest">
+      <path d="M8 8h84v52c0 30-26 48-42 56C34 108 8 90 8 60z" fill="#14204f" stroke="#f2b544" stroke-width="5"/>
+      <circle cx="50" cy="56" r="28" fill="#e8742c" stroke="#f4efe2" stroke-width="3"/>
+      <path d="M24 46c16 6 36 6 52 0M22 66c18-6 38-6 56 0M50 28c-12 14-12 42 0 56M50 28c12 14 12 42 0 56" fill="none" stroke="#f4efe2" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 12l3 7h7l-5.500 4.500 2 7L50 26l-6.500 4.500 2-7L40 19h7z" fill="#f2b544"/>
+    </svg>
+    <div>
+      <h3>Team Earth</h3>
+      <p class="motto">One planet. One roster. Seven sets.</p>
+      <dl>
+        <dt>Nickname</dt><dd>The Blue Marbles</dd>
+        <dt>Colors</dt><dd><span class="sw" style="background:#14204f"></span>Deep navy <span class="sw" style="background:#e8742c"></span>Court orange <span class="sw" style="background:#f2b544"></span>Gold <span class="sw" style="background:#f4efe2"></span>Cream</dd>
+        <dt>Home court</dt><dd>Earth Orbital Arena</dd>
+        <dt>Style</dt><dd>Aggressive offense, unbreakable floor defense, calm under pressure.</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="tiles"><div class="tile"><b>18</b><span>Players</span></div><div class="tile"><b>8</b><span>Nations</span></div><div class="tile"><b>14</b><span>Staff</span></div><div class="tile"><b>7</b><span>Sets to win</span></div></div>
+  <h2>Team rating</h2>
+  <div class="tr">
+    <div class="trbig"><b id="tovr">0</b><span>Team OVR, Starting 7</span></div>
+    <div class="trg" id="grp"></div>
+  </div>
+  <p class="note" id="tnote"></p>
+  <h2>Leadership core</h2>
+  <div class="lead">
+    <div class="cap"><span class="badge">CPT</span><b>Simone Giannelli</b><span>Italy. The 6’7” tactical general who commands the net and runs the most aggressive offense in the universe.</span></div>
+    <div class="cap"><span class="badge">Co-CPT</span><b>Yuki Ishikawa</b><span>Japan. The technical maestro and defensive anchor, steady and clutch under pressure.</span></div>
+  </div>
+
+  </section>
+  <section class="page" id="lineup">
+  <h2>The Starting 7</h2>
+  <div class="court">
+    <div class="net">NET</div>
+    <div class="rows">
+      <div class="row">
+        <div class="pl"><div class="pos">OH1</div><b>Wilfredo León</b><small>Poland. The Nuclear Weapon</small></div>
+        <div class="pl"><div class="pos">MB1</div><b>Robertlandy Simón</b><small>Cuba. The Middle Heavy Artillery</small></div>
+        <div class="pl"><div class="pos">OP</div><b>Nimir Abdel-Aziz</b><small>Netherlands. The High-Ball Machine</small></div>
+      </div>
+      <div class="row">
+        <div class="pl"><div class="pos">OH2</div><b>Yuki Ishikawa</b><small>Japan. The Defensive Glue</small></div>
+        <div class="pl"><div class="pos">MB2</div><b>Agustín Loser</b><small>Argentina. The Human Wall</small></div>
+        <div class="pl"><div class="pos">S</div><b>Simone Giannelli</b><small>Italy. Captain</small></div>
+      </div>
+    </div>
+    <div class="libs">
+      <div class="pl"><div class="pos">L (defense)</div><b>Jenia Grebennikov</b><small>France</small></div>
+      <div class="pl"><div class="pos">L (receive)</div><b>Fabio Balaso</b><small>Italy</small></div>
+    </div>
+  </div>
+  <p class="note">The libero slot is shared by Grebennikov (defense) and Balaso (receive).</p>
+
+  <h2>Rotation order</h2>
+  <div class="chips" id="rchips" role="group" aria-label="Choose rotation">
+    <button class="rchip" data-r="0" aria-pressed="true">Rotation 1</button>
+    <button class="rchip" data-r="1" aria-pressed="false">2</button>
+    <button class="rchip" data-r="2" aria-pressed="false">3</button>
+    <button class="rchip" data-r="3" aria-pressed="false">4</button>
+    <button class="rchip" data-r="4" aria-pressed="false">5</button>
+    <button class="rchip" data-r="5" aria-pressed="false">6</button>
+  </div>
+  <div class="court">
+    <div class="net">NET</div>
+    <div class="rowlbl">Front row</div>
+    <div class="row" id="rfront"></div>
+    <div class="rowlbl">Back row</div>
+    <div class="row" id="rback"></div>
+  </div>
+  <p class="note" id="rnote"></p>
+
+  <h2>Bench plan</h2>
+  <div class="tac"><dl>
+    <dt>Libero</dt><dd>Grebennikov and Balaso share the slot: Grebennikov when defense is the priority, Balaso when opponents serve heavy.</dd>
+    <dt>Setters</dt><dd>Christenson runs the 6-2 double-sub. De Cecco comes in to disrupt blockers with deceptive check-sets.</dd>
+    <dt>Outsides</dt><dd>Takahashi covers León in serve-receive. Michieletto and Semeniuk are the steady rotation options; N’Gapeth is the chaos sub.</dd>
+    <dt>Middles</dt><dd>Kochanowski and Russo spell Simón and Loser at the block and the service line.</dd>
+    <dt>Opposite</dt><dd>Nishida replaces Nimir in the 6-2, bringing a lefty angle.</dd>
+  </dl></div>
+  </section>
+  <section class="page" id="roster">
+  <h2>Full roster</h2>
+  <p class="note">Bars are draft scouting grades from 1 to 10. They are my estimates, so adjust them as you see fit.</p>
+  <div class="chips" id="chips" role="group" aria-label="Filter by position">
+    <button class="chip" data-f="all" aria-pressed="true">All 18</button>
+    <button class="chip" data-f="S" aria-pressed="false">Setters 3</button>
+    <button class="chip" data-f="OH" aria-pressed="false">Outside hitters 6</button>
+    <button class="chip" data-f="MB" aria-pressed="false">Middle blockers 4</button>
+    <button class="chip" data-f="L" aria-pressed="false">Liberos 3</button>
+    <button class="chip" data-f="OP" aria-pressed="false">Opposites 2</button>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  </section>
+  <section class="page" id="staff">
+  <h2>The coaching staff</h2>
+  <h3 class="sg">Coaches</h3>
+  <div class="staff">
+    <div class="sc"><div class="role">Head coach</div><div class="who"><b>Nikola Grbić</b><span>Serbia / Poland national team</span></div><p class="why"><strong>The ultimate cool head under pressure.</strong> An Olympic gold medalist setter turned champion coach, Grbić has the gravitas to manage superstar egos and keep teams calm in high-stakes moments, which makes him the blueprint designer for a grueling 7-set match.</p></div>
+    <div class="sc"><div class="role">First assistant, defensive coordinator</div><div class="who"><b>Philippe Blain</b><span>France / Japan national team</span></div><p class="why"><strong>Architect of the Japanese defensive renaissance.</strong> Blain transformed Japan’s floor defense and block coordination. He scouts alien offensive systems and builds the floor-defense blueprint for Ishikawa, Grebennikov and Balaso.</p></div>
+    <div class="sc"><div class="role">Second assistant, positional specialist and data liaison</div><div class="who"><b>Tuomas Sammelvuo</b><span>Finland</span></div><p class="why"><strong>The technical drillmaster.</strong> A modern, analytical coach who bridges raw data and on-court execution. He runs high-volume positional drills to keep the middles (Simón, Loser) and the opposite (Nimir) technically flawless.</p></div>
+  </div>
+
+  <h3 class="sg">Technical and operations</h3>
+  <div class="staff">
+    <div class="sc"><div class="role">Technical coordinator, data analyst</div><div class="who"><b>Paweł Rusek</b><span>Poland</span></div><p class="why"><strong>Master of DataVolley.</strong> Lightning-fast at real-time live coding. He deciphers extraterrestrial attack angles and builds instant mid-match heat maps so Grbić has critical adjustments between sets.</p></div>
+  </div>
+
+  <h3 class="sg">Support and performance</h3>
+  <div class="staff">
+    <div class="sc"><div class="role">Strength and conditioning coach</div><div class="who"><b>Giovanni Miale</b><span>Italy / Perugia</span></div><p class="why"><strong>Built for high-impact durability.</strong> He trains the heaviest hitters in the Italian SuperLega. His sole focus is vertical jump endurance and bulletproof shoulders that survive a 7-set bombardment.</p></div>
+    <div class="sc"><div class="role">Athletic trainer</div><div class="who"><b>Jean-Benoît Morin</b><span>France</span></div><p class="why"><strong>The peak recovery specialist.</strong> With years of experience in high-load tournament environments, he handles injury prevention, load monitoring and rapid baseline recovery so starters don’t fade from fatigue.</p></div>
+  </div>
+
+  <h2>The front office</h2>
+  <h3 class="sg">Volleyball operations: building the team</h3>
+  <div class="staff">
+    <div class="sc"><div class="role">General manager, VP of volleyball operations</div><div class="who"><b>Gino Sirci</b><span>Italy / President of Sir Safety Perugia</span></div><p class="why"><strong>The ultimate Galáctico builder.</strong> Famous for deep pockets, massive ambition and a relentless pursuit of the world’s best players (he signed León, Giannelli and Semeniuk in real life). He is the cutthroat architect who manages contracts and balances the salary cap for a multi-million-dollar squad.</p></div>
+    <div class="sc"><div class="role">Director of international operations and scouting</div><div class="who"><b>Georges Matijasevic</b><span>France / Elite Volley Agency</span></div><p class="why"><strong>The king of volleyball super-agents.</strong> The mastermind behind some of the sport’s biggest international transfers. He has personal lines to elite federations worldwide and knows how to navigate FIVB International Transfer Certificates (ITCs) and intergalactic visas.</p></div>
+    <div class="sc"><div class="role">Player personnel and welfare manager</div><div class="who"><b>Katarzyna Skowrońska</b><span>Poland</span></div><p class="why"><strong>The experienced global nomad.</strong> A legendary former international who played in Poland, Italy, China, Brazil, Turkey and the USA, she understands the grind of relocation. She manages housing, cultural assimilation and language translation for our mix of Italian, Japanese, Cuban, French and Polish stars.</p></div>
+  </div>
+
+  <h3 class="sg">Business operations: generating revenue</h3>
+  <div class="staff">
+    <div class="sc"><div class="role">Team president, CEO</div><div class="who"><b>Aleksander Śliwka</b><span>Poland / ZAKSA</span></div><p class="why"><strong>The ultimate leader on and off the court.</strong> Known for executive intellect and diplomatic communication, he is the bridge for board expectations, television broadcasting rights and premium intergalactic venue contracts.</p></div>
+    <div class="sc"><div class="role">Director of ticket sales and fan experience</div><div class="who"><b>Masaaki Obe</b><span>Japan / Japan Volleyball Association and SV.League operations</span></div><p class="why"><strong>Master of the modern volleyball fanbase.</strong> Japanese volleyball set the blueprint for fan engagement, selling out arenas with idol-like player hype. Obe coordinates matchday programming: DJ tracks, cinematic intro videos and t-shirt tosses timed to tight video-challenge reviews.</p></div>
+    <div class="sc"><div class="role">VP of corporate sponsorships and marketing</div><div class="who"><b>Yayoi Sato</b><span>Japan / Suntory Sunbirds marketing</span></div><p class="why"><strong>Commercial powerhouse.</strong> She secures high-profile corporate backing, court-floor decals and jersey patches, and runs the creative content engine, directing social media reels that turn players like Ishikawa and Nishida into global merchandising draws.</p></div>
+    <div class="sc"><div class="role">PR and media director</div><div class="who"><b>Francesca Michielin</b><span>Italy / Lega Volley PR</span></div><p class="why"><strong>The shield of the media room.</strong> Post-match press conferences in a high-profile sport need a pro. She handles high-stakes interview requests and the team’s official communications when emotions run high after a 7-set thriller.</p></div>
+  </div>
+
+  <h3 class="sg">The hybrid role</h3>
+  <div class="staff">
+    <div class="sc"><div class="role">Director of volleyball operations (DOVO)</div><div class="who"><b>Stefano Sciascia</b><span>Italy / Trentino. Confirmed</span></div><p class="why"><strong>The clipboard-wielding bridge between coaches and front office.</strong> Moving this roster across the cosmos takes flawless execution: blocking out luxury hotel floors for 6’11” hitters, planning high-calorie menus for Nimir and Simón, and renting private hyperbaric practice facilities.</p></div>
+  </div>
+
+  <h3 class="sg">Org chart (proposed reporting lines)</h3>
+  <div class="orgtop"><b>Aleksander Śliwka</b><br>Team president, CEO</div>
+  <div class="org">
+    <div class="col"><div class="box hd"><b>Gino Sirci</b><small>General manager</small></div><div class="box">Georges Matijasevic<small>International ops, scouting</small></div><div class="box">Katarzyna Skowrońska<small>Player welfare</small></div><div class="box">Stefano Sciascia<small>DOVO</small></div></div>
+    <div class="col"><div class="box hd"><b>Nikola Grbić</b><small>Head coach</small></div><div class="box">Philippe Blain<small>Defensive coordinator</small></div><div class="box">Tuomas Sammelvuo<small>Positional specialist</small></div><div class="box">Paweł Rusek<small>Data analyst</small></div><div class="box">Giovanni Miale<small>Strength and conditioning</small></div><div class="box">Jean-Benoît Morin<small>Athletic trainer</small></div></div>
+    <div class="col"><div class="box hd"><b>Business operations</b><small>Reports to the CEO</small></div><div class="box">Masaaki Obe<small>Tickets, fan experience</small></div><div class="box">Yayoi Sato<small>Sponsorships, marketing</small></div><div class="box">Francesca Michielin<small>PR, media</small></div></div>
+  </div>
+  </section>
+  <section class="page" id="playbook">
+  <h2>Tactical playbook</h2>
+  <div class="tacs">
+    <div class="tac"><h3><i>1</i>Chaos sub</h3><p>…spikes, underhand sets, and impossible trick shots. This breaks the emotional momentum of the alien squad and fires up our bench.</p></div>
+    <div class="tac"><h3><i>2</i>The 6-2 double-sub (the triple-pin attack)</h3>
+      <dl>
+        <dt>Trigger</dt><dd>Nimir rotating to the front row causes a defensive mismatch, or we need to block a towering alien outside hitter.</dd>
+        <dt>The move</dt><dd>Giannelli and Nimir sub out. Micah Christenson (S) and Yuji Nishida (OP) sub in.</dd>
+        <dt>The result</dt><dd>Earth keeps three front-row hitters at all times. Christenson brings pristine, fast-hand precision, while lefty Nishida changes the attacking angle on the right pin and forces the alien defense to flip its blocking alignment mid-set.</dd>
+      </dl></div>
+    <div class="tac"><h3><i>3</i>The serve-receive lock (the shield)</h3>
+      <dl>
+        <dt>Trigger</dt><dd>Opponents are on a massive jump-serve run targeting León.</dd>
+        <dt>The move</dt><dd>Bring in Ran Takahashi to sub for León in the back row during the receive phase.</dd>
+        <dt>The result</dt><dd>A bulletproof passing trio of Ishikawa, Takahashi and Balaso neutralizes the service pressure, so Giannelli gets a perfect pass to run the offense.</dd>
+      </dl></div>
+    <div class="tac"><h3><i>4</i>The quick-tempo middle attack</h3>
+      <dl>
+        <dt>Trigger</dt><dd>The alien block is leaning toward the pins and its middle is late closing.</dd>
+        <dt>The move</dt><dd>Giannelli runs a 1-tempo to Simón or Loser, with Russo’s timing as the template.</dd>
+        <dt>The result</dt><dd>The middle hits before the block can seal, which freezes their middle blocker and opens one-on-one chances for León and Nimir.</dd>
+      </dl></div>
+    <div class="tac"><h3><i>5</i>The pipe attack</h3>
+      <dl>
+        <dt>Trigger</dt><dd>Their middles are stacked toward the antennas, or our front row is facing a double block.</dd>
+        <dt>The move</dt><dd>León or Nimir attacks from the back row off a clean Balaso pass.</dd>
+        <dt>The result</dt><dd>A third attacking lane forces the block to split, and the hitter faces a single blocker or none.</dd>
+      </dl></div>
+    <div class="tac"><h3><i>6</i>The setter dump</h3>
+      <dl>
+        <dt>Trigger</dt><dd>Their middle blocker releases early to help on the pins.</dd>
+        <dt>The move</dt><dd>Giannelli attacks on the second contact with a stealth dump.</dd>
+        <dt>The result</dt><dd>It scores a free point and keeps their middle honest for the rest of the set.</dd>
+      </dl></div>
+    <div class="tac"><h3><i>7</i>Targeted float serving</h3>
+      <dl>
+        <dt>Trigger</dt><dd>Rusek’s heat maps show a weak passer or a soft seam on their floor.</dd>
+        <dt>The move</dt><dd>Kochanowski, with his jump-float serve, aims at that passer and the seam.</dd>
+        <dt>The result</dt><dd>Their offense goes out of system, which sets up our block and transition game.</dd>
+      </dl></div>
+    <div class="tac"><h3><i>8</i>The check-set disruption</h3>
+      <dl>
+        <dt>Trigger</dt><dd>Their blockers have started reading Giannelli’s hands and hips.</dd>
+        <dt>The move</dt><dd>De Cecco subs in and mixes deceptive check-sets with late changes of direction.</dd>
+        <dt>The result</dt><dd>The blockers can no longer commit early, which opens the pins and the middle.</dd>
+      </dl></div>
+  </div>
+  <h3 class="sg">Scouting the alien squad (draft profile)</h3>
+  <div class="tac"><dl>
+    <dt>Threat</dt><dd>Jump-serve barrage aimed at León. <b>Counter:</b> the serve-receive lock.</dd>
+    <dt>Threat</dt><dd>Towering outside hitters. <b>Counter:</b> Loser and Russo at the block, then the 6-2 double-sub.</dd>
+    <dt>Threat</dt><dd>Momentum swings. <b>Counter:</b> N’Gapeth’s trick shots to reset the room.</dd>
+    <dt>Threat</dt><dd>A grueling 7-set pace. <b>Counter:</b> Miale’s conditioning and Morin’s load monitoring.</dd>
+  </dl></div>
+  </section>
+  <section class="page" id="matchplan">
+  <h2>Match plan by set</h2>
+  <div class="plan"><dl>
+    <dt>Set 1</dt><dd>Starting 7 as locked. Learn the alien serve and attack patterns; Blain’s defense gets its first live read.</dd>
+    <dt>Set 2</dt><dd>Rusek’s heat maps feed Grbić’s adjustments. Tune the block and floor-defense positions.</dd>
+    <dt>Set 3</dt><dd>Run the 6-2 double-sub if Nimir’s front-row rotation creates a mismatch or a tall outside hitter needs a block.</dd>
+    <dt>Set 4</dt><dd>If León is being targeted, bring in Takahashi for the serve-receive lock.</dd>
+    <dt>Set 5</dt><dd>Deploy the chaos sub if the alien squad takes momentum.</dd>
+    <dt>Set 6</dt><dd>Spell tired starters with Michieletto, Semeniuk, Kochanowski and Russo.</dd>
+    <dt>Set 7</dt><dd>Captains take over. Giannelli and Ishikawa lead the closing rotations with the best-conditioned lineup.</dd>
+  </dl></div>
+  </section>
+  <section class="page" id="cards">
+  <h2>Attribute cards</h2>
+  <p class="note">Tap a player to open his card. Tap any attribute to see what it does. Ratings are draft estimates built from each player’s profile, so edit them as you see fit.</p>
+  <div class="picks" id="picks"></div>
+  <div id="card2k"></div>
+  </section>
+  <section class="page" id="kits">
+  <h2>Kits</h2>
+  <p class="note">Home is navy and gold, away is cream and orange. Jersey numbers are placeholders in roster order, so send me the real ones and I will swap them in.</p>
+  <div class="chips" id="kchips" role="group" aria-label="Choose kit">
+    <button class="kchip" data-k="0" aria-pressed="true">Home</button>
+    <button class="kchip" data-k="1" aria-pressed="false">Away</button>
+  </div>
+  <div class="kits" id="kitgrid"></div>
+  </section>
+</div>
+<script>
+var R=[
+["S","Simone Giannelli","🇮🇹 Italy","CPT",1,"Captain and starting setter."],
+["S","Micah Christenson","🇺🇸 USA","",0,"Elite fast-hand precision; essential for executing the 6-2 double-sub tactic."],
+["S","Luciano De Cecco","🇦🇷 Argentina","",0,"The veteran wizard who baffles alien blockers with deceptive check-sets."],
+["OH","Wilfredo León","🇵🇱 Poland","Starter",1,"The Nuclear Weapon."],
+["OH","Yuki Ishikawa","🇯🇵 Japan","Co-CPT",1,"Starter. The Defensive Glue."],
+["OH","Alessandro Michieletto","🇮🇹 Italy","",0,"A towering 6’11” frame with the defensive agility of a much shorter player."],
+["OH","Earvin N’Gapeth","🇫🇷 France","",0,"The ultimate chaos agent, deployed to break alien momentum with impossible trick shots."],
+["OH","Kamil Semeniuk","🇵🇱 Poland","",0,"A high-efficiency machine balancing rock-solid serve-receive with smart, heavy attacking."],
+["OH","Ran Takahashi","🇯🇵 Japan","",0,"Elite ball-control specialist who locks down the passing lane during enemy service runs."],
+["MB","Robertlandy Simón","🇨🇺 Cuba","Starter",1,"The Middle Heavy Artillery."],
+["MB","Agustín Loser","🇦🇷 Argentina","Starter",1,"The Human Wall."],
+["MB","Jakub Kochanowski","🇵🇱 Poland","",0,"Fast lateral transition speed paired with a brutal hybrid jump-float serve."],
+["MB","Roberto Russo","🇮🇹 Italy","",0,"A 6’9” shutdown presence with built-in offensive synergy with Giannelli."],
+["L","Jenia Grebennikov","🇫🇷 France","Starter: defense",1,"Floor-general reflexes that vacuum up heavy alien spikes."],
+["L","Fabio Balaso","🇮🇹 Italy","Starter: receive",1,"Back-to-back World Championship shield against high-velocity jump serves."],
+["L","Tomohiro Yamamoto","🇯🇵 Japan","",0,"Flawless positional awareness and speed to sustain grueling 7-set defensive rallies."],
+["OP","Nimir Abdel-Aziz","🇳🇱 Netherlands","Starter",1,"The High-Ball Machine."],
+["OP","Yuji Nishida","🇯🇵 Japan","",0,"A gravity-defying lefty spark plug who shifts momentum with explosive service runs."]
+];
+var g=document.getElementById("grid");
+R.forEach(function(r){
+  var d=document.createElement("div");
+  d.className="card"+(r[4]?" start":"");d.dataset.p=r[0];
+  var t=r[3]?'<span class="tag'+(r[3].indexOf("CPT")>-1?" c":"")+'">'+r[3]+"</span>":"";
+  d.innerHTML="<h3><span>"+r[1]+"</span>"+t+'</h3><div class="meta">'+r[2]+" · "+r[0]+"</div><p>"+r[5]+"</p>";
+  g.appendChild(d);
+});
+document.getElementById("chips").addEventListener("click",function(e){
+  var b=e.target.closest(".chip");if(!b)return;
+  var f=b.dataset.f;
+  document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===b?"true":"false")});
+  document.querySelectorAll(".card").forEach(function(c){c.hidden=!(f==="all"||c.dataset.p===f)});
+});
+var NM={S:'Giannelli',OH1:'León',OH2:'Ishikawa',MB1:'Simón',MB2:'Loser',OP:'Abdel-Aziz'};
+var ORD=['S','OH1','MB1','OP','OH2','MB2'];
+function cell(slot,p){
+  var back=(p===5||p===6||p===1),mb=(slot==='MB1'||slot==='MB2');
+  var lib=back&&mb,nm=lib?'Libero':NM[slot],sub=lib?'for '+NM[slot]:slot;
+  return '<div class="pl'+(lib?' lib':'')+(p===1?' srv':'')+'"><div class="pn">P'+p+(p===1?' · serves':'')+'</div><div class="pos">'+(lib?'L':slot)+'</div><b>'+nm+'</b><small>'+sub+'</small></div>';
+}
+function rot(n){
+  var pos={};
+  for(var i=0;i<6;i++){pos[((i-n+6)%6)+1]=ORD[i];}
+  document.getElementById('rfront').innerHTML=[4,3,2].map(function(p){return cell(pos[p],p)}).join('');
+  document.getElementById('rback').innerHTML=[5,6,1].map(function(p){return cell(pos[p],p)}).join('');
+  document.getElementById('rnote').textContent='Rotation '+(n+1)+': '+NM[pos[1]]+' serves. Players rotate clockwise, so the player in P2 moves to P1 after a side-out. The libero replaces whichever middle blocker is in the back row.';
+}
+rot(0);
+document.getElementById('rchips').addEventListener('click',function(e){
+  var b=e.target.closest('.rchip');if(!b)return;
+  document.querySelectorAll('.rchip').forEach(function(c){c.setAttribute('aria-pressed',c===b?'true':'false')});
+  rot(+b.dataset.r);
+});
+var G={"Simone Giannelli":[5,8,7,3],"Micah Christenson":[4,7,6,3],"Luciano De Cecco":[4,6,5,3],"Wilfredo León":[10,10,7,7],"Yuki Ishikawa":[8,6,6,9],"Alessandro Michieletto":[8,6,7,8],"Earvin N\u2019Gapeth":[8,7,5,7],"Kamil Semeniuk":[8,7,6,9],"Ran Takahashi":[7,6,5,10],"Robertlandy Simón":[9,7,9,2],"Agustín Loser":[8,6,9,2],"Jakub Kochanowski":[8,8,8,2],"Roberto Russo":[7,6,9,2],"Jenia Grebennikov":[1,2,1,10],"Fabio Balaso":[1,1,1,10],"Tomohiro Yamamoto":[1,1,1,9],"Nimir Abdel-Aziz":[10,8,7,3],"Yuji Nishida":[9,9,6,4]};
+var LB=["ATK","SRV","BLK","RCV"];
+document.querySelectorAll(".card").forEach(function(c){
+  var v=G[c.querySelector("h3 span").textContent];if(!v)return;
+  var h="";v.forEach(function(n,i){h+="<span>"+LB[i]+"</span><i><u style='width:"+n*10+"%'></u></i>"});
+  var d=document.createElement("div");d.className="bars";d.innerHTML=h;c.appendChild(d);
+});
+var CATS=[
+["Physical",0,"Approach Vertical~Max jump off a full 3- or 4-step approach;Standing Vertical~Max jump from a standstill, key for quick net reactions;Sprint Speed~Top running speed chasing balls out of bounds;Acceleration~Burst from a stationary base to full motion;Lateral Quickness~Shuffle speed along the net and across the back row;Launch Mechanics~How efficiently the approach turns into vertical lift;Shoulder Elasticity~Arm-swing speed and the whip that creates spin;Stamina~Resists stat drops in long 5-set matches;Core Stability~Mid-air balance to absorb contact or hit while contorted"],
+["Mental",1,"Anticipation~Reads the server’s or hitter’s eyes and approach to move before contact;Court Geometry~Tracks lines and antennae without looking down;Transition Recognition~Speed of switching from defense to an offensive approach;Composure~Keeps the green-release window stable in loud or away games;Clutch~Stat boosts at match point, set point and deuce;Discipline~Resists fake sets, decoys and trick float serves"],
+["Spiking and serving",2,"Spike Power~Raw velocity and wrist snap behind a driven ball;Contact Point~Hits the ball at the apex of the jump;Wrist-Away Accuracy~Bends the wrist mid-air for sharp cross-court and line angles;Tooling/Wiping~Aims at a blocker’s fingertips to force a deflection out;Block Absorption~Swings through a block without a net touch or a stuff;Tip Finesse~Control and deception on rolls, tips and drops;Serve Velocity~Top speed on running jump serves~3;Float Movement~Erratic movement on float and jump-float serves~3;Serve Targeting~Accuracy to corners, seams and target players~3"],
+["Receiving",4,"Underhand Platform~Angle control passing with two forearms;Overhead Receive~Stability catching hard balls with open hands;Dig Absorption~Cushions a spike and pops it cleanly up;Seam Coverage~Radius and speed to close the gap to a teammate;Dive Lunge~Max floor coverage on a desperate dive;Pancake Technique~Frame-perfect slide of a flat hand under a ball;Deflection Recovery~Reaction speed to chase balls off a teammate’s block or arm"],
+["Blocking",5,"Block Press/Penetration~How far hands thrust over the net to cut off the ball;Block Coverage Width~Wingspan and area sealed at the net;Joust Strength~Arm rigidity wrestling for a ball on the tape;Soft Block~Deflects a spike up and back for a teammate to dig;Swing Block Footwork~Swing-step speed to close gaps on pin-to-pin sets;Recovery Reset~Lands, recovers and turns to find the ball"],
+["Setting",6,"Hand Release~Clean, soft, fast release that avoids double touches;Pin Placement~Micro-accuracy to the outside and opposite antennas;Middle Connection~Timing quick sets into the middle’s hitting pocket;Out-of-System Setting~High, hittable balls while off balance or off court;Tempo Scaling~Fast, flat sets like Go, Hut, Bic and Pipe;Set Deception~Same body stance on every set;Setter Dump~Velocity and stealth of second-contact attacks"],
+["Volleyball IQ",7,"Block Reading~Sees blockers’ hands mid-air and adjusts the swing;Floor Seams IQ~Spots open holes and weak passers in real time;Setter Tracking~Reads the setter’s hands, hips and posture;Covering Awareness~Steps under a teammate’s block to save a blocked ball;Out-of-Bounds Judgement~Lets long and wide balls drop;Hitter Synergy~Grows the longer a setter and hitter play together"]
+];
+var PF={"Simone Giannelli":[80,92,60,88,55,82,98,94],"Micah Christenson":[76,86,55,80,52,74,94,88],"Luciano De Cecco":[66,92,45,66,52,62,92,95],"Wilfredo León":[99,88,99,99,78,86,40,86],"Yuki Ishikawa":[88,92,86,78,92,76,45,92],"Alessandro Michieletto":[90,80,88,76,86,84,42,82],"Earvin N’Gapeth":[88,86,89,82,80,70,50,90],"Kamil Semeniuk":[86,84,88,84,92,78,40,86],"Ran Takahashi":[82,84,80,76,96,66,40,86],"Robertlandy Simón":[92,80,90,84,50,98,35,84],"Agustín Loser":[88,78,86,76,48,95,35,82],"Jakub Kochanowski":[89,78,88,88,48,92,35,80],"Roberto Russo":[86,80,84,78,46,95,35,84],"Jenia Grebennikov":[76,90,25,35,99,30,40,94],"Fabio Balaso":[74,88,22,30,99,28,40,92],"Tomohiro Yamamoto":[78,84,22,30,96,28,40,86],"Nimir Abdel-Aziz":[93,82,98,92,50,88,32,82],"Yuji Nishida":[94,80,96,95,58,80,30,80]};
+var WT={S:[.1,.15,0,.05,0,.05,.5,.15],OH:[.15,.1,.3,.1,.15,.1,0,.1],MB:[.15,.05,.2,.1,0,.35,0,.15],OP:[.2,.05,.35,.2,0,.1,0,.1],L:[.1,.15,0,0,.5,0,0,.25]};
+function jit(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return Math.abs(h)%13-6}
+function tier(v){return v>=90?4:v>=80?3:v>=70?2:v>=60?1:0}
+var PK=document.getElementById("picks"),KC=document.getElementById("card2k");
+R.forEach(function(r,i){var b=document.createElement("button");b.className="pk";b.setAttribute("aria-pressed","false");b.dataset.i=i;b.innerHTML=r[1]+"<small>"+r[0]+" · "+r[2]+"</small>";PK.appendChild(b)});
+var BD={"Simone Giannelli":["Tactical General"],"Micah Christenson":["Fast Hands"],"Luciano De Cecco":["Veteran Wizard"],"Wilfredo León":["Nuclear Weapon"],"Yuki Ishikawa":["Defensive Glue","Technical Maestro"],"Alessandro Michieletto":["Agile Giant"],"Earvin N’Gapeth":["Chaos Agent"],"Kamil Semeniuk":["Efficiency Machine"],"Ran Takahashi":["Passing Lane Lockdown"],"Robertlandy Simón":["Middle Heavy Artillery"],"Agustín Loser":["Human Wall"],"Jakub Kochanowski":["Hybrid Serve"],"Roberto Russo":["Shutdown Presence"],"Jenia Grebennikov":["Floor General"],"Fabio Balaso":["World Champion Shield"],"Tomohiro Yamamoto":["Rally Sustainer"],"Nimir Abdel-Aziz":["High-Ball Machine"],"Yuji Nishida":["Lefty Spark Plug"]};
+var FOC={S:[6,7],OH:[2,4],MB:[5,2],OP:[2,3],L:[4,7]};
+function k2(i,go){
+  var r=R[i],p=PF[r[1]].map(function(x,j){return FOC[r[0]].indexOf(j)>-1?Math.min(99,Math.round(x*1.1)):x}),w=WT[r[0]],ovr=0,all=[],h="";
+  w.forEach(function(x,j){ovr+=x*p[j]});ovr=Math.min(99,Math.round(ovr));
+  CATS.forEach(function(c){
+    var rows="",sum=0,n=0;
+    c[2].split(";").forEach(function(a){
+      var q=a.split("~"),idx=q[2]!==undefined?+q[2]:c[1];
+      var v=Math.max(25,Math.min(99,p[idx]+jit(r[1]+q[0])));
+      sum+=v;n++;all.push([q[0],v]);
+      rows+='<button class="kr t'+tier(v)+'"><span class="kn">'+q[0]+'</span><span class="kv">'+v+'</span><i><u style="width:'+v+'%"></u></i><small>'+q[1]+'</small></button>';
+    });
+    h+='<div class="kc"><h4>'+c[0]+'<em>'+Math.round(sum/n)+'</em></h4>'+rows+'</div>';
+  });
+  all.sort(function(a,b){return b[1]-a[1]});
+  var bd=(BD[r[1]]||[]).map(function(x){return"<span>\u2605 "+x+"</span>"}).join("");
+  var top=all.slice(0,3).map(function(a){return"<span>"+a[0]+" "+a[1]+"</span>"}).join("");
+  KC.innerHTML='<div class="k2"><div class="k2h"><div class="ovr"><b>'+ovr+'</b><span>OVR</span></div><div><h3>'+r[1]+'</h3><p>'+r[0]+" · "+r[2]+'</p><div class="bdg">'+bd+'</div><div class="top">'+top+'</div></div></div><div class="k2g">'+h+'</div></div>';
+  PK.querySelectorAll(".pk").forEach(function(b){b.setAttribute("aria-pressed",+b.dataset.i===i?"true":"false")});
+  if(go)KC.firstChild.scrollIntoView({behavior:"smooth",block:"start"});
+}
+PK.addEventListener("click",function(e){var b=e.target.closest(".pk");if(b)k2(+b.dataset.i,true)});
+KC.addEventListener("click",function(e){var r=e.target.closest(".kr");if(r)r.classList.toggle("open")});
+k2(0,false);
+function ovrOf(i){
+  var r=R[i],p=PF[r[1]].map(function(x,j){return FOC[r[0]].indexOf(j)>-1?Math.min(99,Math.round(x*1.1)):x}),o=0;
+  WT[r[0]].forEach(function(x,j){o+=x*p[j]});return Math.min(99,Math.round(o));
+}
+var OV={};R.forEach(function(r,i){OV[r[1]]=ovrOf(i)});
+var SB=["Simone Giannelli","Wilfredo León","Yuki Ishikawa","Robertlandy Simón","Agustín Loser","Nimir Abdel-Aziz"];
+var sv=SB.map(function(n){return OV[n]});sv.push(Math.max(OV["Jenia Grebennikov"],OV["Fabio Balaso"]));
+document.getElementById("tovr").textContent=Math.round(sv.reduce(function(a,b){return a+b},0)/7);
+var GR=[["Setters","S"],["Outside hitters","OH"],["Middle blockers","MB"],["Opposites","OP"],["Liberos","L"]],ga=[];
+document.getElementById("grp").innerHTML=GR.map(function(g){
+  var xs=R.filter(function(r){return r[0]===g[1]}).map(function(r){return OV[r[1]]});
+  var a=Math.round(xs.reduce(function(s,v){return s+v},0)/xs.length);ga.push([g[0],a]);
+  return '<div class="grow"><span>'+g[0]+'</span><i><u style="width:'+a+'%"></u></i><b>'+a+'</b></div>';
+}).join("");
+ga.sort(function(a,b){return b[1]-a[1]});
+document.getElementById("tnote").textContent="Strongest group: "+ga[0][0].toLowerCase()+" ("+ga[0][1]+"). Most room to grow: "+ga[ga.length-1][0].toLowerCase()+" ("+ga[ga.length-1][1]+"). Group scores average every player at that position.";
+var KS=[["#14204f","#f2b544","#f4efe2"],["#f4efe2","#e8742c","#14204f"]];
+function jersey(k,n){var c=KS[k];return '<svg viewBox="0 0 100 110" role="img" aria-label="Jersey '+n+'"><path d="M30 8L6 22l10 22 14-6v62h40V38l14 6 10-22L70 8c-4 8-10 12-20 12S34 16 30 8z" fill="'+c[0]+'" stroke="'+c[1]+'" stroke-width="3"/><path d="M30 8c4 8 10 12 20 12s16-4 20-12" fill="none" stroke="'+c[1]+'" stroke-width="5"/><rect x="30" y="92" width="40" height="6" fill="'+c[1]+'"/><text x="50" y="70" text-anchor="middle" font-family="Big Shoulders Display,Arial Narrow,Impact,sans-serif" font-weight="900" font-size="38" fill="'+c[2]+'">'+n+'</text></svg>'}
+function kits(k){
+  document.getElementById("kitgrid").innerHTML=R.map(function(r,i){return '<div class="kit">'+jersey(k,i+1)+'<b>'+r[1]+'</b><small>'+r[0]+'</small></div>'}).join("");
+  document.querySelectorAll(".kchip").forEach(function(b){b.setAttribute("aria-pressed",+b.dataset.k===k?"true":"false")});
+}
+kits(0);
+document.getElementById("kchips").addEventListener("click",function(e){var b=e.target.closest(".kchip");if(b)kits(+b.dataset.k)});
+function show(){
+  var h=(location.hash||"#home").slice(1),pg=document.getElementById(h);
+  if(!pg||!pg.classList.contains("page")){h="home";}
+  document.querySelectorAll(".page").forEach(function(p){p.classList.toggle("on",p.id===h)});
+  document.querySelectorAll("#nav a").forEach(function(a){if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",show);show();
+document.getElementById("prt").addEventListener("click",function(){try{window.print()}catch(e){}});
+</script>
+</body>
+</html>
